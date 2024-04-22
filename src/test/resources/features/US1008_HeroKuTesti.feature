@@ -1,4 +1,4 @@
-@wip
+
   Feature: US1008 Kullanici delete butonunun calistigini test eder
 
     Scenario: TC16 Delete butonunun calistigini test eder

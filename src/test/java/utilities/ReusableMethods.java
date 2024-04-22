@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-public class ReusableMethods {
+public class  ReusableMethods {
 
     public static void bekle(int saniye){
 

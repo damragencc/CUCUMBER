@@ -4,12 +4,20 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.opentelemetry.sdk.metrics.data.DoubleExemplarData;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import pages.TestOtomasyonuPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class testotomasyonuStepdefinitions {
 
@@ -119,6 +127,76 @@ public class testotomasyonuStepdefinitions {
     public void girisYapilamadiginiTestEder() {
 
         Assert.assertTrue(testOtomasyonuPage.emailKutusu.isDisplayed());
+    }
+
+    @When("email listesinden   {string} girer")
+    public void emailListesindenGirer(String verilenEmail) {
+        testOtomasyonuPage.emailKutusu.sendKeys(verilenEmail);
+    }
+
+    @And("password listesinden {string} girer")
+    public void passwordListesindenGirer(String verilenPassword) {
+        testOtomasyonuPage.passwordKutusu.sendKeys(verilenPassword);
+    }
+
+    @Then("{int}.satirda ki {string}  aratir")
+    public void satirdaKiAratir(int satirNo) throws IOException {
+        FileInputStream fileInputStream=new FileInputStream("src/test/resources/urunListesi.xlsx");
+
+        Workbook workbook= WorkbookFactory.create(fileInputStream);
+
+        Sheet sheet1 = workbook.getSheet("Sheet1");
+
+        String satirdakiUrunIsmi=sheet1.getRow(satirNo-1)
+                                       .getCell(0)
+                                       .toString();
+
+        testOtomasyonuPage.aramaKutusu.sendKeys(satirdakiUrunIsmi+Keys.ENTER);
+
+
+
+
+
+    }
+
+    @Then("{int}.satirdaki urunu aratir")
+    public void satirdakiUrunuAratir(int satirNo) throws IOException {
+
+        FileInputStream fileInputStream=new FileInputStream("src/test/resources/urunListesii.xlsx");
+
+        Workbook workbook=WorkbookFactory.create(fileInputStream);
+
+        Sheet sheet1 = workbook.getSheet("Sheet1");
+
+        String satirdakiUrunIsmi = sheet1.getRow(satirNo-1)
+                .getCell(0).toString();
+
+        testOtomasyonuPage.aramaKutusu.sendKeys(satirdakiUrunIsmi+Keys.ENTER);
+
+    }
+
+    @And("bulunan urun sayisinin {int}.satirdaki min urun sayisina esit veya daha fazla test eder")
+    public void bulunanUrunSayisininSatirdakiMinUrunSayisinaEsitVeyaDahaFazlaTestEder(int satirSayisi ) throws IOException {
+
+        FileInputStream fileInputStream=new FileInputStream("src/test/resources/urunListesii.xlsx");
+
+        Workbook workbook=WorkbookFactory.create(fileInputStream);
+
+        Sheet sheet1 = workbook.getSheet("Sheet1");
+
+        double satirdakiMinUrunSayisi = sheet1.getRow(satirSayisi-1)
+                .getCell(1)
+                .getNumericCellValue();
+
+        double actualBulunanUrunSayisi = testOtomasyonuPage.bulunanUrunElementleriList.size();
+
+        Assert.assertTrue(actualBulunanUrunSayisi>=satirdakiMinUrunSayisi);
+
+
+        Driver.quitDriver();
+
+
+
     }
 }
 

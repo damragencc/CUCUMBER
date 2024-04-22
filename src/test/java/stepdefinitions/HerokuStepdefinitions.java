@@ -20,12 +20,10 @@ public class HerokuStepdefinitions {
     HeroKuPage heroKuPage = new HeroKuPage();
 
 
-
     @When("kullanici Add Element butonuna basar")
     public void kullanici_add_element_butonuna_basar() {
 
         heroKuPage.addButonu.click();
-
 
     }
     @When("Delete butonu’nun gorunur oldugunu test eder")
