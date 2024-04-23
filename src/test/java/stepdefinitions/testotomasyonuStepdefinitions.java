@@ -4,10 +4,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.opentelemetry.sdk.metrics.data.DoubleExemplarData;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
+
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import pages.TestOtomasyonuPage;
@@ -22,7 +20,11 @@ import java.io.IOException;
 public class testotomasyonuStepdefinitions {
 
 
+
     TestOtomasyonuPage testOtomasyonuPage = new TestOtomasyonuPage();
+
+    public testotomasyonuStepdefinitions() throws FileNotFoundException {
+    }
 
     @Given("kullanici testotomasyonu anasayfaya gider")
     public void kullanici_testotomasyonu_anasayfaya_gider() {
@@ -92,6 +94,8 @@ public class testotomasyonuStepdefinitions {
 
         Driver.getDriver().get(ConfigReader.getProperty(istenenUrlAdi));
 
+
+
     }
     @Then("account butonuna basar")
     public void account_butonuna_basar() {
@@ -141,7 +145,7 @@ public class testotomasyonuStepdefinitions {
 
     @Then("{int}.satirda ki {string}  aratir")
     public void satirdaKiAratir(int satirNo) throws IOException {
-        FileInputStream fileInputStream=new FileInputStream("src/test/resources/urunListesi.xlsx");
+        FileInputStream fileInputStream=new FileInputStream("src/test/resources/urunListesii.xlsx");
 
         Workbook workbook= WorkbookFactory.create(fileInputStream);
 
@@ -159,46 +163,72 @@ public class testotomasyonuStepdefinitions {
 
     }
 
-    @Then("{int}.satirdaki urunu aratir")
-    public void satirdakiUrunuAratir(int satirNo) throws IOException {
 
-        FileInputStream fileInputStream=new FileInputStream("src/test/resources/urunListesii.xlsx");
 
-        Workbook workbook=WorkbookFactory.create(fileInputStream);
 
-        Sheet sheet1 = workbook.getSheet("Sheet1");
 
-        String satirdakiUrunIsmi = sheet1.getRow(satirNo-1)
+    @Then("{int}.satirised urunu aratir")
+    public void satirisedUrunuAratir(int satirNo) throws IOException {
+        FileInputStream fileInputStream = new FileInputStream("src/test/resources/urunListesi.xlsx");
+        Workbook workbook = WorkbookFactory.create(fileInputStream);
+
+        Sheet sheet2 = workbook.getSheet("Sheet1");
+
+        String satirdakiUrunIsmi = sheet2.getRow(satirNo - 1)
                 .getCell(0).toString();
 
-        testOtomasyonuPage.aramaKutusu.sendKeys(satirdakiUrunIsmi+Keys.ENTER);
+        testOtomasyonuPage.aramaKutusu.sendKeys(satirdakiUrunIsmi + Keys.ENTER);
+
 
     }
 
-    @And("bulunan urun sayisinin {int}.satirdaki min urun sayisina esit veya daha fazla test eder")
-    public void bulunanUrunSayisininSatirdakiMinUrunSayisinaEsitVeyaDahaFazlaTestEder(int satirSayisi ) throws IOException {
+    @And("bulunan urun sayisinin {int}.satirised min urun sayisina esit veya daha fazla test eder")
+    public void bulunanUrunSayisininSatirisedMinUrunSayisinaEsitVeyaDahaFazlaTestEder(int satirSayisi) throws IOException {
+        FileInputStream fileInputStream = new FileInputStream("src/test/resources/urunListesi.xlsx");
 
-        FileInputStream fileInputStream=new FileInputStream("src/test/resources/urunListesii.xlsx");
-
-        Workbook workbook=WorkbookFactory.create(fileInputStream);
+        Workbook workbook = WorkbookFactory.create(fileInputStream);
 
         Sheet sheet1 = workbook.getSheet("Sheet1");
 
-        double satirdakiMinUrunSayisi = sheet1.getRow(satirSayisi-1)
-                .getCell(1)
-                .getNumericCellValue();
+        boolean failedOlanVarmi = false;
 
-        double actualBulunanUrunSayisi = testOtomasyonuPage.bulunanUrunElementleriList.size();
+        for (int i = 1; i <= sheet1.getLastRowNum() ; i++) {
 
-        Assert.assertTrue(actualBulunanUrunSayisi>=satirdakiMinUrunSayisi);
+            String satirdakiUrunIsmi = sheet1
+                    .getRow(i)
+                    .getCell(0)
+                    .toString();
 
+            // satirdaki urun ismini to sayfasinda aratip, bulunan sonuc sayisini kaydedelim
 
-        Driver.quitDriver();
+            testOtomasyonuPage.aramaKutusu.sendKeys(satirdakiUrunIsmi + Keys.ENTER);
+
+            double actualBulunanUrunSayisi = testOtomasyonuPage.bulunanUrunElementleriList.size();
+
+            double bulunacakMinimumUrunSayisi = sheet1
+                    .getRow(i)
+                    .getCell(1)
+                    .getNumericCellValue();
+            System.out.println(satirdakiUrunIsmi + " icin minumum bulunacak sayi : " + bulunacakMinimumUrunSayisi +
+                    ", actual bulunan urun sayisi : " + actualBulunanUrunSayisi);
+
+            try {
+                Assert.assertTrue(actualBulunanUrunSayisi >= bulunacakMinimumUrunSayisi);
+            } catch (AssertionError e) {
+                System.out.println(satirdakiUrunIsmi + " icin test FAİLED oldu");
+                failedOlanVarmi = true;
+            }
+
+        }
+
+        Assert.assertFalse(failedOlanVarmi);
 
 
 
     }
-}
+    }
+
+
 
 
 

@@ -16,7 +16,7 @@ public class TestOtomasyonuPage {
     @FindBy(id = "global-search")
     public WebElement aramaKutusu;
 
-    @FindBy(xpath = "//*[@*='product-box my-2  py-1']")
+    @FindBy(xpath = "//div[@class='product-box my-2  py-1']")
     public List<WebElement> bulunanUrunElementleriList;
 
     @FindBy(id = "priceproduct")

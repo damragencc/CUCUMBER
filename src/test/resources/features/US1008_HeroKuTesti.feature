@@ -1,6 +1,6 @@
 
   Feature: US1008 Kullanici delete butonunun calistigini test eder
-
+@smoke2
     Scenario: TC16 Delete butonunun calistigini test eder
 
       Given kullanici "heroUrl" anasayfaya gider
@@ -12,7 +12,6 @@
       And Add Remove Elements yazisinin gorunur oldugunu test eder
       And 2 saniye bekler
       And sayfayi kapatir
-
 
 
 
