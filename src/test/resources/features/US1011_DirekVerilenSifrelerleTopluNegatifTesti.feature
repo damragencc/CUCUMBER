@@ -2,7 +2,7 @@
 Feature: US1011 Kullanici verilen gecersiz kullanici adi ve sifrelerle
   giris yapılamadigini test eder
 
-
+@wip
 
   Scenario Outline: TC18 liste olarak verilen gecersiz bilgiler ile giris yapilamaz
     Given kullanici "toUrl" anasayfaya gider

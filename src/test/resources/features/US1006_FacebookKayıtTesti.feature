@@ -1,6 +1,6 @@
 
     Feature: US1006 Fake bilgilerle kullanici olusturma
-@E2EE
+@sistem
       Scenario: TC14 Faker classi kullanarak facebook'da kayit olusturabilmeli
 
     Given kullanici "faceUrl" anasayfaya gider
