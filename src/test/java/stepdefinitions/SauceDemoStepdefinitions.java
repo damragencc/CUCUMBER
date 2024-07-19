@@ -41,10 +41,8 @@ public class SauceDemoStepdefinitions {
 
         Assert.assertEquals(ilkUrunIsmi,sepettekiUrunIsmi);
 
-        //yapılan degisiklik
 
-        //dsadasda
-        //dsadase
-        //adsdas
+
+
     }
 }
