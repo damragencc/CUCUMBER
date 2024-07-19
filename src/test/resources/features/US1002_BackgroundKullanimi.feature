@@ -4,7 +4,7 @@ Feature: US1002 Negatif arama testi
   # bu adimlari Background: olarak tanimlayabiliriz
 
 
-
+@wip
   Scenario: TC04 kullanici java arattiginda sonuc bulunamamali
 
     Given kullanici testotomasyonu anasayfaya gider
