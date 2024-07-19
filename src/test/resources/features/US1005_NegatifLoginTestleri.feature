@@ -1,6 +1,6 @@
 
 Feature: US1005 gecersiz bilgilerler giris yapılamamali
-
+@wip
   Scenario: TC11 gecerli username ve gecersiz password ile giris yapilamamali
 
 
