@@ -45,6 +45,6 @@ public class SauceDemoStepdefinitions {
 
         //dsadasda
         //dsadase
-        /adsdas
+        //adsdas
     }
 }
