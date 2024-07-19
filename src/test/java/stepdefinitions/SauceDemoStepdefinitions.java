@@ -40,5 +40,7 @@ public class SauceDemoStepdefinitions {
         String sepettekiUrunIsmi = sauceDemoPage.sepettekiUrunIsimElementi.getText();
 
         Assert.assertEquals(ilkUrunIsmi,sepettekiUrunIsmi);
+
+        //yapılan degisiklik
     }
 }
