@@ -1,5 +1,5 @@
 
-@sistem
+
   Feature: US1010 Kullanici verilen gecersiz kullanici adi ve sifrelerle
                    giris yapılamadigini test eder
 

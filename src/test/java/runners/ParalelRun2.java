@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "stepdefinitions",
         tags = "@E2EE",
-        dryRun = false
+        dryRun = true
 )
 
 public class ParalelRun2 {

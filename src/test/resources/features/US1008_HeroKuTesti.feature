@@ -1,6 +1,6 @@
 
   Feature: US1008 Kullanici delete butonunun calistigini test eder
-@wip
+
     Scenario: TC16 Delete butonunun calistigini test eder
 
       Given kullanici "heroUrl" anasayfaya gider

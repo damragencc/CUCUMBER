@@ -14,6 +14,8 @@ public class DemoUrlStepDefinitions {
 
     DemoUrlPage demoUrlPage=new DemoUrlPage();
 
+    ExcelOtomasyonDefinitions excelOtomasyonDefinitions = new ExcelOtomasyonDefinitions();
+
 
 
 
@@ -27,6 +29,8 @@ public class DemoUrlStepDefinitions {
         // basligi Company olan sutundaki tum datalari yazdirin
 
         // 1- tum basliklari bir liste olarak alirim
+
+
 
 
         // 2- tum basliklari bir loop ile gozden gecirip
