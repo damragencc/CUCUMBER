@@ -41,7 +41,7 @@ public class SauceDemoStepdefinitions {
 
         Assert.assertEquals(ilkUrunIsmi,sepettekiUrunIsmi);
 
-
+//DAMRA GENC
 
 
     }
