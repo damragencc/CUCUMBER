@@ -11,7 +11,7 @@ Feature: US1003 kullanici parametre olarak verilen urunun sitede bulundugunu tes
     Then arama sonucunda urun bulunabildigini test eder
     And 3 saniye bekler
     And sayfayi kapatir
-
+@E2E
   Scenario: TC08 Kullanici parametre ile phone aratabilmeli
 
     Given kullanici testotomasyonu anasayfaya gider
@@ -20,7 +20,7 @@ Feature: US1003 kullanici parametre olarak verilen urunun sitede bulundugunu tes
     Then arama sonucunda urun bulunabildigini test eder
     And sayfayi kapatir
 
-
+@E2E
   Scenario: TC09 Kullanici parametre ile Cokokrem arattiginda sonuc bulunmamalı
 
     Given kullanici testotomasyonu anasayfaya gider
